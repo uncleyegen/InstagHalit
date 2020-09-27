@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onPostResume();
 
-        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
     }
