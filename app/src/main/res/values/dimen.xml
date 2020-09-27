@@ -1,0 +1,46 @@
+<resources>
+//Dp Dogru kullanim ekran yukseklikleri  icin
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_11">11dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
+    <dimen name="dimen_13">13dp</dimen>
+    <dimen name="dimen_14">14dp</dimen>
+    <dimen name="dimen_15">15dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_17">17dp</dimen>
+    <dimen name="dimen_18">18dp</dimen>
+    <dimen name="dimen_19">19dp</dimen>
+
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_40">40dp</dimen>
+    <dimen name="dimen_50">50dp</dimen>
+    <dimen name="dimen_60">60dp</dimen>
+    <dimen name="dimen_70">70dp</dimen>
+    <dimen name="dimen_80">80dp</dimen>
+    <dimen name="dimen_90">90dp</dimen>
+//Dogru kullanim yazilar icin
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_11">11sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_13">13sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_17">17sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_19">19sp</dimen>
+
+//Yanlis kullanuim
+    <dimen name="tv_title">14sp</dimen>
+    <dimen name="tv_description">15sp</dimen>
+    <dimen name="tv_body">16sp</dimen>
+
+
+    //Burda gosterilmek istenen her bir rakam unicdir her bir field ihtiyacina
+    gore dp veya sp olusturmak yanlistir.Bir 20 dp herzaman yirmi dpdir,
+    Kisaca app logo icin olusturulan 40 dp lik dimension baska bir ikon icin
+    uretilmeye ihtiyac duyulmaz aksi durumda her bir ekran parcasi icin dp
+    uretmek durumunda kaliriz buna gerek yok bunun yerine 1 den 100 ekadar
+    olan verileri girerek singleton yapmis oluyoruz.Ayni sey sp yani fontlar icin de gecerlidir.
+</resources>
