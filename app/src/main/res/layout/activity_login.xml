@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/login_container"
     android:padding="40dp"
+    android:background="@drawable/animation_colors"
     tools:context="com.halit.instaghalit.LoginActivity">
 
     <ImageView
