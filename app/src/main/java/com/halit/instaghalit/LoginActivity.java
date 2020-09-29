@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };// End of String Request
 
-
+            VolleyHandler.getInstance(getApplicationContext());
 
     }
 
