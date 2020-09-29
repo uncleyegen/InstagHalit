@@ -42,5 +42,16 @@ public class SharedPrefrenceManger {
     }
 
 
+    public boolean isUserLogggedIn(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(FILENAME, Context.MODE_PRIVATE);
+
+        if(sharedPreferences.getString(USERNAME,null) != null){
+            return true;
+        }
+
+        return false;
+    }
+
+
 }
 
