@@ -137,7 +137,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                                 User user = new User(jsonObjectUser.getInt("id"),jsonObjectUser.getString("email"),jsonObjectUser.getString("username"));
 
-                                // Store user data inside sharedPreference
+                                //store user data inside sharedprefrences
+                                SharedPrefrenceManger.getInstance(getApplicationContext()).storeUserData(user);
 
 
 

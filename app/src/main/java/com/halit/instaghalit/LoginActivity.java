@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                 User user = new User(jsonObjectUser.getInt("id"),jsonObjectUser.getString("email"),jsonObjectUser.getString("username"));
 
                                 // Store user data inside sharedPreference
+                                SharedPrefrenceManger.getInstance(getApplicationContext()).storeUserData(user);
 
 
 
@@ -181,6 +182,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        boolean isUserLoggedIn = SharedPrefrenceManger.getInstance(getApplicationContext()).isUserLogggedIn();
+
+        if(isUserLoggedIn){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        }else{
+
         }
     }
 }
