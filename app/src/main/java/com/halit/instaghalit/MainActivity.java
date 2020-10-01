@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -57,37 +58,33 @@ public class MainActivity extends AppCompatActivity {
 
         if (item == R.id.home){
             fragment = new HomeFragment();
-            mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.search){
             fragment = new SearchFragment();
-            mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.camera){
             fragment = new CameraFragment();
-            mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.likes){
             fragment = new LikesFragment();
-            mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.profile){
             fragment = new ProfileFragment();
-            mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.log_out){
 
             SharedPrefrenceManger sharedPrefrenceManger = SharedPrefrenceManger.getInstance(getApplicationContext());
             sharedPrefrenceManger.logUserOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-//            SECENEK 2
-            /*
-            SharedPrefrenceManger sharedPrefrenceManger = SharedPrefrenceManger.getInstance(getApplicationContext());
-            if (sharedPrefrenceManger.isUserLogggedIn()) {
-                sharedPrefrenceManger.logUserOut();
-            }*/
+        }else {
+            Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
 
         }
+
+        //hide naviagtion drawer
+        mDrawerLayout.closeDrawer(Gravity.START);
+
 
         if (fragment !=null){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

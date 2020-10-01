@@ -1,7 +1,6 @@
 package com.halit.instaghalit;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
 /**
@@ -58,8 +57,6 @@ public class SharedPrefrenceManger {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        mContext.startActivity(new Intent(mContext,LoginActivity.class));
-
     }
 
 
