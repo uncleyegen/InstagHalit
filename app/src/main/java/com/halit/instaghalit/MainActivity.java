@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -77,7 +76,17 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(Gravity.START);
 
         }else if (item == R.id.log_out){
-            Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+
+            SharedPrefrenceManger sharedPrefrenceManger = SharedPrefrenceManger.getInstance(getApplicationContext());
+            sharedPrefrenceManger.logUserOut();
+
+//            SECENEK 2
+            /*
+            SharedPrefrenceManger sharedPrefrenceManger = SharedPrefrenceManger.getInstance(getApplicationContext());
+            if (sharedPrefrenceManger.isUserLogggedIn()) {
+                sharedPrefrenceManger.logUserOut();
+            }*/
+
         }
 
         if (fragment !=null){
