@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -30,37 +33,60 @@ public class MainActivity extends AppCompatActivity {
         mActionDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mActionDrawerToggle);
         mActionDrawerToggle.syncState();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        // Listener for navigation View
+        //Default fragment to be displayed
+        changeFragmentDisplay(R.id.home);
+
+        //listener for navigation view
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if (item.getItemId() == R.id.home){
-                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (item.getItemId() == R.id.search){
-                    Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (item.getItemId() == R.id.camera){
-                    Toast.makeText(MainActivity.this, "Camera", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (item.getItemId() == R.id.likes){
-                    Toast.makeText(MainActivity.this, "Likes", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (item.getItemId() == R.id.profile){
-                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (item.getItemId() == R.id.log_out){
-                    Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                }
-
-                return false;
+                changeFragmentDisplay(item.getItemId());
+                return true;
 
             }
         });
+
+    }
+
+    private boolean changeFragmentDisplay(int item) {
+
+        Fragment fragment = null;
+
+        if (item == R.id.home){
+            fragment = new HomeFragment();
+            mDrawerLayout.closeDrawer(Gravity.START);
+
+        }else if (item == R.id.search){
+            fragment = new SearchFragment();
+            mDrawerLayout.closeDrawer(Gravity.START);
+
+        }else if (item == R.id.camera){
+            fragment = new CameraFragment();
+            mDrawerLayout.closeDrawer(Gravity.START);
+
+        }else if (item == R.id.likes){
+            fragment = new LikesFragment();
+            mDrawerLayout.closeDrawer(Gravity.START);
+
+        }else if (item == R.id.profile){
+            fragment = new ProfileFragment();
+            mDrawerLayout.closeDrawer(Gravity.START);
+
+        }else if (item == R.id.log_out){
+            Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+        }
+
+        if (fragment !=null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.main_fragment_content,fragment);
+            ft.commit();
+        }
+
+        return false;
 
     }
 

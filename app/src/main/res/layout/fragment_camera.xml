@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_comments"
+    tools:context=".CameraFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_camera_fragment"
+        android:textColor="@color/colorPink"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="45dp"/>
+
+</FrameLayout>
