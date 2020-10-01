@@ -124,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPrefrenceManger.getInstance(getApplicationContext()).storeUserData(user);
 
 
-
                                 // let user in
                                 finish();
                                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
@@ -132,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             }else {
 
                                 Toast.makeText(LoginActivity.this,jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                                mProgressDialog.dismiss();
                             }
 
                         }catch (JSONException e){
