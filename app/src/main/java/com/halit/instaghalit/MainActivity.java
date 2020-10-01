@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -33,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
         mActionDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mActionDrawerToggle);
         mActionDrawerToggle.syncState();
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
+        getSupportActionBar().setTitle("Instag");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_menu);
 
 
         //Default fragment to be displayed
