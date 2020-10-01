@@ -4,4 +4,11 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_home_fragment">Hello Home fragment</string>
+    <string name="hello_profile_fragment">Hello Profile fragment</string>
+    <string name="hello_likes_fragment">Hello Likes fragment</string>
+    <string name="hello_search_fragment">Hello Search fragment</string>
+    <string name="hello_camera_fragment">Hello Camera fragment</string>
+
 </resources>
