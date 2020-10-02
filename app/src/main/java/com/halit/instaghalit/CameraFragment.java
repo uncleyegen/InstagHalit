@@ -1,7 +1,10 @@
 package com.halit.instaghalit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -29,6 +33,7 @@ public class CameraFragment extends Fragment {
     Uri mImageUri;
     final int CAPTURE_IMAGE = 1,GALLARY_PICK = 2;
     Bitmap bitmap;
+    String mStoryTitle,imageToString;
 
 
     public CameraFragment() {
@@ -121,5 +126,50 @@ public class CameraFragment extends Fragment {
 
     private void storyAndImageTitle() {
 
+            final EditText editText = new EditText(getContext());
+            editText.setTextColor(Color.BLACK);
+            editText.setHint("Set Title/Tags for story");
+            editText.setHintTextColor(Color.GRAY);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Story Title");
+            builder.setCancelable(false);
+            builder.setView(editText);
+
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mStoryTitle = editText.getText().toString();
+                    imageToString = convertImageToString();
+                    uploadStory();
+
+                }
+            });
+
+             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                }
+            });
+
+
+            builder.show();
+
+
+
+
+
+        }
+
+    private void uploadStory() {
+
     }
+
+    private String convertImageToString() {
+        return null;
+    }
+
 }
+
