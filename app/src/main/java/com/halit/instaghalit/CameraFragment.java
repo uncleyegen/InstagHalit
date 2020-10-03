@@ -52,6 +52,7 @@ public class CameraFragment extends Fragment {
     final int CAPTURE_IMAGE = 1,GALLARY_PICK = 2;
     Bitmap bitmap;
     String mStoryTitle,imageToString,mProfileImage;
+    boolean OkToUpload;
 
 
     public CameraFragment() {
@@ -84,6 +85,8 @@ public class CameraFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getProfileImage();
 
         capture_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +236,11 @@ public class CameraFragment extends Fragment {
     private void uploadStory(){
 
 
+        if(!OkToUpload){
+            Toast.makeText(getContext(),"There is no image to upload!",Toast.LENGTH_LONG).show();
+
+            return;
+        }
 
 
          final String dateOfImage = dateOfImage();
@@ -240,7 +248,7 @@ public class CameraFragment extends Fragment {
          User user = SharedPrefrenceManger.getInstance(getContext()).getUserData();
          final String username = user.getUsername();
          final int user_id = user.getId();
-         final String profile_image = getProfileImage();
+         final String profile_image = mProfileImage;
 
 
         final ProgressDialog mProgrssDialog =  new ProgressDialog(getContext());
@@ -300,7 +308,7 @@ public class CameraFragment extends Fragment {
                 imageMap.put("time",currentTime);
                 imageMap.put("username",username);
                 imageMap.put("user_id",String.valueOf(user_id));
-                imageMap.put("profile_image", profile_image);
+                imageMap.put("profile_image", mProfileImage);
                 return  imageMap;
             }
         };//end of string Request
