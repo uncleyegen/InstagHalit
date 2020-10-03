@@ -51,7 +51,7 @@ public class CameraFragment extends Fragment {
     Uri mImageUri;
     final int CAPTURE_IMAGE = 1,GALLARY_PICK = 2;
     Bitmap bitmap;
-    String mStoryTitle,imageToString;
+    String mStoryTitle,imageToString,mProfileImage;
 
 
     public CameraFragment() {
@@ -182,6 +182,53 @@ public class CameraFragment extends Fragment {
         }
 
 
+    private void getProfileImage(){
+
+
+        User user = SharedPrefrenceManger.getInstance(getContext()).getUserData();
+        int user_id = user.getId();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLS.get_user_data+user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(!jsonObject.getBoolean("error")){
+
+                                JSONObject jsonObjectUser =  jsonObject.getJSONObject("user");
+
+                                mProfileImage =  jsonObjectUser.getString("image");
+
+
+
+                            }else{
+
+                                Toast.makeText(getContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+
+        );
+
+        VolleyHandler.getInstance(getContext().getApplicationContext()).addRequetToQueue(stringRequest);
+    }
+
 
     private void uploadStory(){
 
@@ -193,7 +240,7 @@ public class CameraFragment extends Fragment {
          User user = SharedPrefrenceManger.getInstance(getContext()).getUserData();
          final String username = user.getUsername();
          final int user_id = user.getId();
-         final String profile_image = getProfileImage;
+         final String profile_image = getProfileImage();
 
 
         final ProgressDialog mProgrssDialog =  new ProgressDialog(getContext());
