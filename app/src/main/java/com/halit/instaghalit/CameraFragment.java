@@ -79,6 +79,8 @@ public class CameraFragment extends Fragment {
         capture_btn =  view.findViewById(R.id.capture_btn);
         captured_iv =  view.findViewById(R.id.captured_iv);
 
+        OkToUpload = false;
+
         return view;
     }
 
@@ -161,6 +163,7 @@ public class CameraFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     mStoryTitle = editText.getText().toString();
+                    getProfileImage();
                     imageToString = convertImageToString();
                     uploadStory();
 
