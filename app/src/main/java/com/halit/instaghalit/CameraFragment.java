@@ -1,6 +1,7 @@
 package com.halit.instaghalit;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +22,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -165,7 +179,86 @@ public class CameraFragment extends Fragment {
 
         }
 
-    private void uploadStory() {
+
+
+    private void uploadStory(){
+
+
+
+
+         String dateOfImage = dateOfImage();
+         String currentTime = currentTime();
+         User user = SharedPrefrenceManger.getInstance(getContext()).getUserData();
+         String username = user.getUsername();
+         int user_id = user.getId();
+         String profile_image = getProfileImage;
+
+
+        final ProgressDialog mProgrssDialog =  new ProgressDialog(getContext());
+        mProgrssDialog.setTitle("Uploading Story");
+        mProgrssDialog.setMessage("Please wait....");
+        mProgrssDialog.show();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLS.upload_story_image,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(!jsonObject.getBoolean("error")){
+                                mProgrssDialog.dismiss();
+
+                                JSONObject jsonObjectUser = jsonObject.getJSONObject("image");
+
+                                Toast.makeText(getContext(),"story uploaded successfully!",Toast.LENGTH_LONG).show();
+
+                                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                ft.replace(R.id.main_fragment_content,new HomeFragment());
+                                ft.commit();
+
+
+                            }else{
+
+                                Toast.makeText(getContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_LONG).show();
+                        mProgrssDialog.dismiss();
+                    }
+                }
+
+
+        ){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> imageMap = new HashMap<>();
+                imageMap.put("image_name",dateOfImage);
+                imageMap.put("image_encoded",imageToString);
+                imageMap.put("title",mStoryTitle);
+                imageMap.put("time",currentTime);
+                imageMap.put("username",username);
+                imageMap.put("user_id",String.valueOf(user_id));
+                imageMap.put("profile_image", profile_image);
+                return  imageMap;
+            }
+        };//end of string Request
+
+        VolleyHandler.getInstance(getContext().getApplicationContext()).addRequetToQueue(stringRequest);
+
+
 
     }
 
