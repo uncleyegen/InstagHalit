@@ -36,6 +36,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -186,12 +188,12 @@ public class CameraFragment extends Fragment {
 
 
 
-         String dateOfImage = dateOfImage();
-         String currentTime = currentTime();
+         final String dateOfImage = dateOfImage();
+         final String currentTime = currentReadableTime();
          User user = SharedPrefrenceManger.getInstance(getContext()).getUserData();
-         String username = user.getUsername();
-         int user_id = user.getId();
-         String profile_image = getProfileImage;
+         final String username = user.getUsername();
+         final int user_id = user.getId();
+         final String profile_image = getProfileImage;
 
 
         final ProgressDialog mProgrssDialog =  new ProgressDialog(getContext());
@@ -258,6 +260,21 @@ public class CameraFragment extends Fragment {
 
         VolleyHandler.getInstance(getContext().getApplicationContext()).addRequetToQueue(stringRequest);
 
+
+
+    }
+
+    private String dateOfImage(){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return timestamp.toString();
+    }
+
+
+
+    private String currentReadableTime(){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Date date = new Date(timestamp.getTime());
+        return date.toString();
 
 
     }
