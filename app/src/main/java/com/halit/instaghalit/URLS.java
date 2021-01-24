@@ -6,6 +6,9 @@ package com.halit.instaghalit;
 
 public class URLS {
 
+//    public static final String login_api   = "https://cikisgiris.000webhostapp.com/InstagHalit/login.php";
+
+
     public static final String login_api   = "https://cikisgiris.000webhostapp.com/InstagHalit/login.php";
     public static final String sign_up_api = "https://cikisgiris.000webhostapp.com/InstagHalit/sign_up.php";
     public static final String upload_story_image = "https://cikisgiris.000webhostapp.com/InstagHalit/upload_story_image.php";
